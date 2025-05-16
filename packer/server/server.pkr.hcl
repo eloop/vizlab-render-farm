@@ -10,7 +10,7 @@ packer {
 # Variables for better flexibility and reuse
 variable "image_name" {
   type        = string
-  default     = "ubuntu-24.04-server"
+  default     = "hq-server"
   description = "The name of the output image"
 }
 
