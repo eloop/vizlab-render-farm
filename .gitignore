@@ -19,6 +19,10 @@ packer_cache/
 output-*/
 manifest.json
 *.pkrvars.hcl
+*.pkr.hcl.json
+*.pkr.hcl.json.new
+*.pkr.hcl.json.old
+*.pkr.hcl.json.backup
 
 # Emacs
 *~
@@ -66,3 +70,20 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# OpenStack
+*.openrc.sh
+*.openrc.sh.new
+*.openrc.sh.old
+*.openrc.sh.backup
+
+# SSH keys
+*.pem
+*.key
+*.ppk
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
