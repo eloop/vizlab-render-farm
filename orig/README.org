@@ -1,0 +1,227 @@
+#
+
+* NOTES
+** command for running new hqserver
+
+/opt/hqueue/python/bin/python3.9-bin /opt/hqueue/hqserver/manage.py serve
+
+** ini file /opt/hqueue/hqserver.ini ...
+
+[main]
+email_to = you@yourdomain.com
+smtp_server = localhost
+error_email_from = paste@localhost
+port = 5000
+scheduling_algorithm = sharecpu
+job_logs_dir = %(here)s/job_logs
+active_timeout = 3
+expire_jobs_days = 10
+max_fails_allowed = 5
+upgrade_priority = 100
+
+[logging]
+file = %(here)s/hqserver.log
+#level = INFO
+level = DEBUG
+max_file_size = 10
+max_backup_files = 5
+
+** useful command for looking at open ports
+
+root@hqnew:~# netstat -tulpvn
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/init
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      710/sshd: /usr/sbin
+tcp        0      0 127.0.0.1:5000          0.0.0.0:*               LISTEN      3938/docker-proxy
+tcp        0      0 0.0.0.0:59171           0.0.0.0:*               LISTEN      708/rpc.statd
+tcp        0      0 100.99.24.129:34692     0.0.0.0:*               LISTEN      2040/tailscaled
+tcp        0      0 0.0.0.0:36753           0.0.0.0:*               LISTEN      -
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      610/systemd-resolve
+tcp6       0      0 :::33177                :::*                    LISTEN      708/rpc.statd
+tcp6       0      0 :::8600                 :::*                    LISTEN      2582/consul
+tcp6       0      0 :::8500                 :::*                    LISTEN      2582/consul
+tcp6       0      0 :::111                  :::*                    LISTEN      1/init
+tcp6       0      0 :::8301                 :::*                    LISTEN      2582/consul
+tcp6       0      0 :::22                   :::*                    LISTEN      710/sshd: /usr/sbin
+tcp6       0      0 :::4648                 :::*                    LISTEN      2633/nomad
+tcp6       0      0 :::4647                 :::*                    LISTEN      2633/nomad
+tcp6       0      0 :::4646                 :::*                    LISTEN      2633/nomad
+tcp6       0      0 fd7a:115c:a1e0:ab:34692 :::*                    LISTEN      2040/tailscaled
+tcp6       0      0 :::43763                :::*                    LISTEN      -
+udp        0      0 0.0.0.0:35964           0.0.0.0:*                           -
+udp        0      0 0.0.0.0:53009           0.0.0.0:*                           708/rpc.statd
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           610/systemd-resolve
+udp        0      0 10.0.6.255:68           0.0.0.0:*                           608/systemd-network
+udp        0      0 0.0.0.0:111             0.0.0.0:*                           1/init
+udp        0      0 0.0.0.0:41641           0.0.0.0:*                           2040/tailscaled
+udp        0      0 127.0.0.1:884           0.0.0.0:*                           708/rpc.statd
+udp        0      0 127.0.0.1:5000          0.0.0.0:*                           3951/docker-proxy
+udp6       0      0 :::8301                 :::*                                2582/consul
+udp6       0      0 :::111                  :::*                                1/init
+udp6       0      0 :::8600                 :::*                                2582/consul
+udp6       0      0 :::4648                 :::*                                2633/nomad
+udp6       0      0 :::41641                :::*                                2040/tailscaled
+udp6       0      0 :::54086                :::*                                -
+udp6       0      0 :::33897                :::*                                708/rpc.statd
+root@hqnew:~#
+
+
+** Relevant ChatGPT session
+
+
+
+# New Session (writer) - Sunday, 16 April 2023 07:23:38 AEST
+## 🙋‍♂️ Prompt
+Hello
+
+### 🤖 Answer
+Hello, how can I assist you with regards to programming?
+
+
+#### 🙋‍♂️ Reply
+I'd like to add nginx to a nomad job to front end the back end web app.
+
+##### 🤖 Answer
+Sure, I can help you with that. Here are the high-level steps:
+
+1. Create an nginx configuration file that specifies the reverse proxy settings for your back-end web app. The configuration file should specify the IP address and port number of your back-end service.
+
+2. Ensure that nginx is installed on your Nomad node. You can either use a pre-built container image or install nginx directly on the node.
+
+3. Create a Nomad job specification that includes both the back-end web app and nginx. The job specification should include the nginx configuration file and any other required dependencies.
+
+4. In the Nomad job specification, specify the configuration for nginx using the `task` stanza. This can be done by specifying the `command` to run, the path to the configuration file, and any environment variables required.
+
+5. Submit the job to Nomad using the `nomad job run` command.
+
+6. Verify that your back-end web app is accessible via the nginx proxy by navigating to the IP address and port number specified in the nginx configuration file.
+
+Here is an example nginx configuration file:
+
+```
+server {
+  listen 80;
+  server_name my.domain.com;
+
+  location / {
+    proxy_pass http://backend-service-ip:port;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+```
+
+Replace `backend-service-ip` and `port` with the IP address and port number of your back-end service.
+
+I hope this helps. Let me know if you have any further questions.
+
+#### 🙋‍♂️ Reply
+I need the nginx to be run by a nomad agent, that is also running my web app.
+
+##### 🤖 Answer
+Sure, no problem. In that case, you'll want to define the nginx task in the same Nomad job file as your web app.
+
+Here's an example Nomad job file that defines both a web app and an nginx task to act as a reverse proxy:
+
+```
+job "my-web-app" {
+  datacenters = ["dc1"]
+  type = "service"
+
+  group "web-app-group" {
+    count = 1
+
+    restart {
+      interval = "5m"
+      attempts = 3
+      delay = "15s"
+    }
+
+    task "nginx" {
+      driver = "docker"
+
+      config {
+        image = "nginx:1.19.6-alpine"
+        network_mode = "host"
+        port_map {
+          http = 80
+        }
+      }
+
+      template {
+        data = <<EOF
+server {
+  listen 80;
+  server_name my.domain.com;
+
+  location / {
+    proxy_pass http://localhost:5000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+EOF
+        destination = "nginx.conf"
+      }
+
+      resources {
+        cpu = 500
+        memory = 256
+        network {
+          mbits = 10
+          port "http" {}
+        }
+      }
+
+      env {
+        BACKEND_HOST = "localhost"
+        BACKEND_PORT = "5000"
+      }
+    }
+
+    task "web-app" {
+      driver = "docker"
+
+      config {
+        image = "my-web-app:latest"
+        network_mode = "host"
+      }
+
+      resources {
+        cpu = 500
+        memory = 256
+        network {
+          mbits = 10
+        }
+      }
+
+      service {
+        name = "my-web-app"
+        port = "http"
+        tags = ["urlprefix-/my-web-app"]
+      }
+    }
+  }
+}
+```
+
+In this example, we're defining two tasks in the same group: `nginx` and `web-app`.
+
+The `nginx` task is responsible for running the nginx reverse proxy. We're using the `nginx:1.19.6-alpine` Docker image for this purpose. We also define the `network_mode` as "host" to avoid running into any port mapping issues with the reverse proxy.
+
+We then provide the nginx configuration via the `template` block to serve as the configuration for the reverse proxy. This block will create a file named `nginx.conf` containing our reverse proxy configuration within the nginx container.
+
+We also specify the `resources` required by our nginx container, including CPU and memory as well as the network bandwidth required.
+
+Finally, we also define the environment variables `BACKEND_HOST` and `BACKEND_PORT` to allow us to reference the backend service in the nginx configuration.
+
+The `web-app` task is responsible for running your web app. We're using the Docker image `my-web-app:latest` to run the web app. We also use the `service` block to define the name of our web app service and its associated port and tags.
+
+With these two tasks defined, we can then launch both the web app and the nginx reverse proxy in the same Nomad job file using the `nomad run` command.
+
+I hope this helps. Let me know if you have any more questions.
