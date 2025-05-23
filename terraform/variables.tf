@@ -35,7 +35,7 @@ variable "devtag" {
 # How many slurm/hqueue workers will we create?
 variable "n_workers" {
   type    = number
-  default = 9
+  default = 29
 }
 
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.

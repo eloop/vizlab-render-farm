@@ -85,10 +85,6 @@ resource "openstack_compute_instance_v2" "hq_server" {
       #sudo systemctl enable hqclient
       #sudo systemctl start hqclient
 
-      # We want to make sure that the Tailscale device has been
-      # deleted, so we delete it if it exists.
-      echo Setting up Tailscale
-
       # mount the data disk, now done in the image?
       #sudo mkdir -p /data
       #sudo -- sh -c 'echo ${var.vizfs_ip}:/data /data  nfs    _netdev,auto,hard,intr,timeo=10,retrans=10 0 0 >> /etc/fstab'
@@ -105,6 +101,11 @@ resource "openstack_compute_instance_v2" "hq_server" {
   provisioner "remote-exec" {
     inline = [
       <<EOT
+
+      # We want to make sure that the Tailscale device has been
+      # deleted, so we delete it if it exists.
+      # echo Setting up Tailscale
+
       # NOTE: this next bit has been updated and not tested yet.... (drw900)
       # Tailscale - the package is already installed in the image.
       # delete the old tailscale host for if it exists
