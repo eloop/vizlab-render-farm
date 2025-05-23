@@ -53,7 +53,7 @@ resource "openstack_compute_instance_v2" "hq_worker" {
 
   provisioner "local-exec" {
     # convenience function, may remove at a later date
-    command = "ssh-keygen -f ~/.ssh/known_hosts -R ${self.name} || true"
+    command = "ssh-keygen -f ~/.ssh/known_hosts -R ${self.network[0].fixed_ip_v4} || true"
   }
 
   provisioner "remote-exec" {
@@ -71,6 +71,12 @@ resource "null_resource" "worker_configure" {
 
   count       = var.n_workers
   depends_on = [  openstack_compute_instance_v2.hq_worker ]
+
+  # this works wonders!! :-)
+  triggers = {
+    n_workers = var.n_workers
+    hosts_content = filemd5("${path.module}/confs/hosts")
+  }
 
   provisioner "file" {
     source      = "./confs"
@@ -101,8 +107,8 @@ resource "null_resource" "worker_configure" {
     user             = var.ssh_username
     private_key      = file(var.ssh_private_key_file)
     host             = openstack_compute_instance_v2.hq_worker[count.index].network[0].fixed_ip_v4
-    bastion_user     = var.bastion_username
-    bastion_host     = var.bastion_host
+    #bastion_user     = var.bastion_username
+    #bastion_host     = var.bastion_host
   }
 }
 

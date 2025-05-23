@@ -4,6 +4,9 @@
 # we set 'echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf' on that
 # node. We could make it here, but it's a pain to wait for it every time
 # we do a complete "destroy/apply" cycle.
+#
+# update: using Tailscale subnet routing allows us to *not* have to go
+# through the bastion these days!
 
 variable "username" {
   description = "openstack username"
@@ -32,7 +35,7 @@ variable "devtag" {
 # How many slurm/hqueue workers will we create?
 variable "n_workers" {
   type    = number
-  default = 3
+  default = 1
 }
 
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.
@@ -66,24 +69,24 @@ variable "ssh_private_key_file" {
   description = "Path to the SSH private key file"
 }
 
-# Bastion Configuration
-variable "bastion_host" {
-  type        = string
-  default     = "130.56.246.26"
-  description = "The bastion host for SSH access"
-}
+# # Bastion Configuration
+# variable "bastion_host" {
+#   type        = string
+#   default     = "130.56.246.26"
+#   description = "The bastion host for SSH access"
+# }
 
-variable "bastion_username" {
-  type        = string
-  default     = "centos"
-  description = "The username for the bastion host"
-}
+# variable "bastion_username" {
+#   type        = string
+#   default     = "centos"
+#   description = "The username for the bastion host"
+# }
 
-variable "bastion_private_key_file" {
-  type        = string
-  default     = "~/.ssh/z03.pem"
-  description = "Path to the private key file for the bastion host"
-}
+# variable "bastion_private_key_file" {
+#   type        = string
+#   default     = "~/.ssh/z03.pem"
+#   description = "Path to the private key file for the bastion host"
+# }
 
 # Houdini Configuration
 variable "license_server" {

@@ -23,10 +23,10 @@ client {
     enabled = true
     path = "/g/data/z03"
   }
-  host_volume "data" {
-    enabled = true
-    path = "/data"
-  }
+  #host_volume "data" {
+  #  enabled = true
+  #  path = "/data"
+  #}
 }
 
 # note this is not very secure! Better to just use public image repo

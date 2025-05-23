@@ -44,8 +44,8 @@ build {
       sudo mkdir -p /g/data/z03
       sudo -- sh -c 'echo gdata1a.cloud.nci.org.au:/mnt/gdata1a/z03    /g/data/z03    nfs    _netdev,auto,hard,intr,timeo=10,retrans=10,vers=4 0 0 >> /etc/fstab'
       # mount the data disk
-      sudo mkdir -p /data
-      sudo -- sh -c 'echo ${var.vizfs_ip}:/data /data  nfs    _netdev,auto,hard,intr,timeo=10,retrans=10 0 0 >> /etc/fstab'
+      #sudo mkdir -p /data
+      #sudo -- sh -c 'echo ${var.vizfs_ip}:/data /data  nfs    _netdev,auto,hard,intr,timeo=10,retrans=10 0 0 >> /etc/fstab'
 
       # we want to use it now, so we mount
       #sudo mount /data
