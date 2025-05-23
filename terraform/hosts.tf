@@ -20,7 +20,7 @@ locals {
     "${var.cluster_subnet}.253 hq-server hq-server-internal",
     ""
   ],
-  # Worker entries
+  # Worker entries, autgenerated.
   [for i in range(1, var.n_workers + 1) :
     "${var.cluster_subnet}.${i} hq-worker-${format("%03d", i)} hq-worker-${format("%03d", i)}-internal"
   ]))

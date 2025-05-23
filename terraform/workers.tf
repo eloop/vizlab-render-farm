@@ -77,8 +77,9 @@ resource "null_resource" "worker_configure" {
 
   # this works wonders!! :-)
   triggers = {
+    instance_id = openstack_compute_instance_v2.hq_worker[count.index].id
     n_workers = var.n_workers
-    hosts_content = local_file.hosts.content
+    hosts_content = filemd5("${path.module}/confs/hosts")
   }
 
   provisioner "file" {

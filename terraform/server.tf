@@ -47,6 +47,9 @@ resource "openstack_compute_instance_v2" "hq_server" {
   provisioner "local-exec" {
     command = "ssh-keygen -f ~/.ssh/known_hosts -R ${self.name}-internal || true"
   }
+  provisioner "local-exec" {
+    command = "ssh-keygen -f ~/.ssh/known_hosts -R ${self.network[0].fixed_ip_v4} || true"
+  }
 
   provisioner "remote-exec" {
     inline = [

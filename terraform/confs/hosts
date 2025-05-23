@@ -1,0 +1,41 @@
+127.0.0.1 localhost
+127.0.1.1 ubuntu
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.0.7.253 hq-server hq-server-internal
+
+10.0.7.1 hq-worker-001 hq-worker-001-internal
+10.0.7.2 hq-worker-002 hq-worker-002-internal
+10.0.7.3 hq-worker-003 hq-worker-003-internal
+10.0.7.4 hq-worker-004 hq-worker-004-internal
+10.0.7.5 hq-worker-005 hq-worker-005-internal
+10.0.7.6 hq-worker-006 hq-worker-006-internal
+10.0.7.7 hq-worker-007 hq-worker-007-internal
+10.0.7.8 hq-worker-008 hq-worker-008-internal
+10.0.7.9 hq-worker-009 hq-worker-009-internal
+10.0.7.10 hq-worker-010 hq-worker-010-internal
+10.0.7.11 hq-worker-011 hq-worker-011-internal
+10.0.7.12 hq-worker-012 hq-worker-012-internal
+10.0.7.13 hq-worker-013 hq-worker-013-internal
+10.0.7.14 hq-worker-014 hq-worker-014-internal
+10.0.7.15 hq-worker-015 hq-worker-015-internal
+10.0.7.16 hq-worker-016 hq-worker-016-internal
+10.0.7.17 hq-worker-017 hq-worker-017-internal
+10.0.7.18 hq-worker-018 hq-worker-018-internal
+10.0.7.19 hq-worker-019 hq-worker-019-internal
+10.0.7.20 hq-worker-020 hq-worker-020-internal
+10.0.7.21 hq-worker-021 hq-worker-021-internal
+10.0.7.22 hq-worker-022 hq-worker-022-internal
+10.0.7.23 hq-worker-023 hq-worker-023-internal
+10.0.7.24 hq-worker-024 hq-worker-024-internal
+10.0.7.25 hq-worker-025 hq-worker-025-internal
+10.0.7.26 hq-worker-026 hq-worker-026-internal
+10.0.7.27 hq-worker-027 hq-worker-027-internal
+10.0.7.28 hq-worker-028 hq-worker-028-internal
+10.0.7.29 hq-worker-029 hq-worker-029-internal
