@@ -36,7 +36,7 @@ resource "openstack_compute_instance_v2" "hq_server" {
   }
 
   provisioner "file" {
-    source      = "./confs"
+    source      = "${path.module}/confs"
     destination = "confs"
   }
 

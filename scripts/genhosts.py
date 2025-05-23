@@ -12,10 +12,11 @@ from pathlib import Path
 # Get the directory containing this script
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = SCRIPT_DIR.parent
+TERRAFORM_DIR = PROJECT_ROOT / "terraform"
 
 def get_n_workers():
     """Read the number of workers from variables.tf"""
-    with open('variables.tf', 'r') as f:
+    with open(TERRAFORM_DIR / 'variables.tf', 'r') as f:
         config = hcl2.load(f)
 
     # Find the n_workers variable
@@ -60,7 +61,7 @@ def main():
     n_workers = get_n_workers()
 
     # Create confs directory if it doesn't exist
-    confs_dir = PROJECT_ROOT / "confs"
+    confs_dir = TERRAFORM_DIR / "confs"
     confs_dir.mkdir(exist_ok=True)
 
     # Generate hosts file content

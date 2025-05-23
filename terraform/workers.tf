@@ -47,7 +47,7 @@ resource "openstack_compute_instance_v2" "hq_worker" {
   }
 
   provisioner "file" {
-    source      = "./confs"
+    source      = "${path.module}/confs"
     destination = "confs"
   }
 
@@ -79,7 +79,7 @@ resource "null_resource" "worker_configure" {
   }
 
   provisioner "file" {
-    source      = "./confs"
+    source      = "${path.module}/confs"
     destination = "confs"
   }
 

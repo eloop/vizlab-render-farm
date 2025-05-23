@@ -12,13 +12,16 @@ cd "$PROJECT_ROOT"
 
 echo "Setting up deployment..."
 
+# Change to terraform directory
+cd terraform
+
 # Create necessary directories
-mkdir -p logs confs/hqserver confs/hmqserver
+mkdir -p confs/hqserver confs/hmqserver
 
 # Generate hosts file
 echo "Generating hosts file..."
 pip install python-hcl2 --quiet
-python3 scripts/genhosts.py
+python3 ../scripts/genhosts.py
 
 # Make sure mqstart.sh is executable
 chmod +x confs/hmqserver/mqstart.sh

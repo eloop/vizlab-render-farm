@@ -22,6 +22,9 @@ eval $("$SCRIPT_DIR/get_latest_images.py")
 echo "Using server image: $SERVER_IMAGE_NAME ($SERVER_IMAGE_ID)"
 echo "Using worker image: $WORKER_IMAGE_NAME ($WORKER_IMAGE_ID)"
 
+# Change to terraform directory
+cd terraform
+
 # Destroy the infrastructure
 echo "Destroying infrastructure..."
 terraform destroy -auto-approve \
