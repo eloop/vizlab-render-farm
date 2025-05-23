@@ -11,3 +11,11 @@ ff02::2 ip6-allrouters
 10.0.7.253 hq-server hq-server-internal
 
 10.0.7.1 hq-worker-001 hq-worker-001-internal
+10.0.7.2 hq-worker-002 hq-worker-002-internal
+10.0.7.3 hq-worker-003 hq-worker-003-internal
+10.0.7.4 hq-worker-004 hq-worker-004-internal
+10.0.7.5 hq-worker-005 hq-worker-005-internal
+10.0.7.6 hq-worker-006 hq-worker-006-internal
+10.0.7.7 hq-worker-007 hq-worker-007-internal
+10.0.7.8 hq-worker-008 hq-worker-008-internal
+10.0.7.9 hq-worker-009 hq-worker-009-internal
