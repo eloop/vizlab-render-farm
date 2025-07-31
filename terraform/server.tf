@@ -5,24 +5,28 @@
 
 # This node runs the hqserver
 resource "openstack_compute_instance_v2" "hq_server" {
+
+  depends_on = [  local_file.hosts ]
+
   name        = "hq-server"
   image_id    = var.server_image_id
-  flavor_name = "c3pl.16c32m20d"
+  flavor_name = var.server_flavor
 
-  scheduler_hints {
-    group = "${openstack_compute_servergroup_v2.hq-server-group.id}"
-  }
+  # scheduler_hints {
+  #   group = "${openstack_compute_servergroup_v2.hq-server-group.id}"
+  # }
 
   key_pair    = "z03"
 
   # no external ssh at the moment
-  security_groups = ["default", "ping",
+  security_groups = ["default",
     "${openstack_networking_secgroup_v2.wideopen_group.name}",
     "${openstack_networking_secgroup_v2.external_group.name}"
   ]
 
   network {
-    uuid        = "9227876a-c00a-4bc7-8cc5-4419b75f5bc5"
+    name        = "z03"
+    #uuid        = "9227876a-c00a-4bc7-8cc5-4419b75f5bc5"
     fixed_ip_v4 = "${var.cluster_subnet}.253"
   }
 

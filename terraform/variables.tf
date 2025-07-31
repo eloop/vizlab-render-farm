@@ -41,13 +41,23 @@ variable "n_workers" {
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.
 variable "cluster_subnet" {
   type = string
-  default = "10.0.7"
+  default = "10.150.8"
 }
 
-# This is the slurm controller as well as the Hqueue server.
+# This is the Hqueue server.
 variable "headnode_ip" {
   type = string
-  default = "130.56.246.40"
+  #default = "130.56.246.40"
+  default = "130.56.240.193"
+}
+
+variable "server_flavor" {
+  type = string
+  default = "c3ep.16c32m20d"
+}
+variable "worker_flavor" {
+  type = string
+  default = "c3ep.16c32m20d"
 }
 
 # SSH Configuration
@@ -98,7 +108,7 @@ variable "license_server" {
 # Storage Configuration
 variable "vizfs_ip" {
   type        = string
-  default     = "10.0.0.20"
+  default     = "10.150.0.20"
   description = "The IP address of the VizFS server"
 }
 

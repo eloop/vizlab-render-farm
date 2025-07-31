@@ -4,36 +4,39 @@
 
 resource "openstack_compute_instance_v2" "hq_worker" {
 
+  depends_on = [ local_file.hosts ]
+  # depends_on = [
+  #   #openstack_compute_instance_v2.hq_server,
+  #   #openstack_blockstorage_volume_v2.slurm_data
+  # ]
+
+
   timeouts {
     create = "1h"
     update = "1h"
     delete = "20m"
   }
 
-  depends_on = [
-    #openstack_compute_instance_v2.hq_server,
-    #openstack_blockstorage_volume_v2.slurm_data
-  ]
-
   # these are all be hidden from external view
   security_groups = [
-    "default", "ssh", "ping",
+    "default", "z03 ssh",
     "${openstack_networking_secgroup_v2.wideopen_group.name}"
   ]
 
   count       = var.n_workers
   name        = "hq-worker-${format("%03d",count.index+1)}"
   image_id    = var.worker_image_id
-  flavor_name = "c3pl.16c32m20d"
+  flavor_name = var.worker_flavor
 
   key_pair    = "z03"
 
-  scheduler_hints {
-    group = "${openstack_compute_servergroup_v2.hq-server-group.id}"
-  }
+  # scheduler_hints {
+  #   group = "${openstack_compute_servergroup_v2.hq-server-group.id}"
+  # }
 
   network {
-    uuid        = "9227876a-c00a-4bc7-8cc5-4419b75f5bc5"
+    name         = "z03"
+    #uuid        = "9227876a-c00a-4bc7-8cc5-4419b75f5bc5"
     fixed_ip_v4 = "${var.cluster_subnet}.${count.index+1}"
   }
 
@@ -65,6 +68,7 @@ resource "openstack_compute_instance_v2" "hq_worker" {
   }
 }
 
+
 # We do this separately so we can reconfigure without taking down all
 # the VMs. Not doing much here anymore
 resource "null_resource" "worker_configure" {
@@ -72,7 +76,6 @@ resource "null_resource" "worker_configure" {
   count       = var.n_workers
   depends_on = [
     openstack_compute_instance_v2.hq_worker,
-    local_file.hosts
   ]
 
   # this works wonders!! :-)
@@ -80,6 +83,7 @@ resource "null_resource" "worker_configure" {
     instance_id = openstack_compute_instance_v2.hq_worker[count.index].id
     n_workers = var.n_workers
     hosts_content = filemd5("${path.module}/confs/hosts")
+    #hosts_hash = locals.hosts_md5
   }
 
   provisioner "file" {
@@ -115,7 +119,3 @@ resource "null_resource" "worker_configure" {
     #bastion_host     = var.bastion_host
   }
 }
-
-
-
-

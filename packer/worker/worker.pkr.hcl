@@ -6,12 +6,12 @@ locals {
 source "openstack" "worker" {
   image_name                   = local.image_name
   flavor                       = var.flavor
-  security_groups              = ["default", "ssh", "ping"]
+  security_groups              = ["default", "z03 ssh"]
   source_image                 = var.base_image_id
   ssh_keypair_name             = var.ssh_keypair_name
-  ssh_bastion_host             = var.ssh_bastion_host
-  ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
-  ssh_bastion_username         = var.ssh_bastion_username
+  # ssh_bastion_host             = var.ssh_bastion_host
+  # ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
+  # ssh_bastion_username         = var.ssh_bastion_username
   ssh_private_key_file         = var.ssh_private_key_file
   ssh_username                 = var.ssh_username
 

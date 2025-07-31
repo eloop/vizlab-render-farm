@@ -11,12 +11,13 @@ source "openstack" "server" {
   ssh_username                 = var.ssh_username
   ssh_keypair_name            = var.ssh_keypair_name
   ssh_private_key_file        = var.ssh_private_key_file
-  ssh_bastion_host            = var.ssh_bastion_host
-  ssh_bastion_username        = var.ssh_bastion_username
-  ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
+  #ssh_bastion_host            = var.ssh_bastion_host
+  #ssh_bastion_username        = var.ssh_bastion_username
+  #ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
 
   # Security groups
-  security_groups             = ["default", "ssh", "ping"]
+  #security_groups             = ["default", "ssh", "ping"]
+  security_groups             = ["default", "z03 ssh"]
 
   # Image metadata
   metadata = {

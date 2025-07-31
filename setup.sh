@@ -1,5 +1,5 @@
 echo "source me...."
-source ./z03-openrc-v3.sh
+source ./z03-openrc.sh
 export TF_VAR_username=$OS_USERNAME
 export TF_VAR_password=$OS_PASSWORD
 export TF_VAR_tenant=$OS_PROJECT_NAME

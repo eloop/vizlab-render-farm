@@ -10,7 +10,7 @@ resource "openstack_networking_secgroup_rule_v2" "wideopen_rule_1" {
   protocol          = "tcp"
   port_range_min    = 0
   port_range_max    = 0
-  remote_ip_prefix  = "10.0.0.0/16"
+  remote_ip_prefix  = "10.150.0.0/16"
   security_group_id = "${openstack_networking_secgroup_v2.wideopen_group.id}"
 }
 
