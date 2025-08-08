@@ -33,10 +33,11 @@ provider "tailscale" {
 }
 
 # A group so we can enforce antiaffinity
-# resource "openstack_compute_servergroup_v2" "hq-server-group" {
-#   name     = "hq-server-group"
-#   policies = ["anti-affinity"]
-# }
+resource "openstack_compute_servergroup_v2" "hq-server-group" {
+  name     = "hq-server-group"
+  #policies = ["anti-affinity"]
+  policies = ["affinity"]
+}
 
 
 

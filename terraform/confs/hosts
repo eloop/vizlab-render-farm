@@ -31,12 +31,3 @@ ff02::2 ip6-allrouters
 10.150.8.18 hq-worker-018 hq-worker-018-internal
 10.150.8.19 hq-worker-019 hq-worker-019-internal
 10.150.8.20 hq-worker-020 hq-worker-020-internal
-10.150.8.21 hq-worker-021 hq-worker-021-internal
-10.150.8.22 hq-worker-022 hq-worker-022-internal
-10.150.8.23 hq-worker-023 hq-worker-023-internal
-10.150.8.24 hq-worker-024 hq-worker-024-internal
-10.150.8.25 hq-worker-025 hq-worker-025-internal
-10.150.8.26 hq-worker-026 hq-worker-026-internal
-10.150.8.27 hq-worker-027 hq-worker-027-internal
-10.150.8.28 hq-worker-028 hq-worker-028-internal
-10.150.8.29 hq-worker-029 hq-worker-029-internal

@@ -4,7 +4,6 @@
 
 resource "openstack_compute_instance_v2" "hq_worker" {
 
-  depends_on = [ local_file.hosts ]
   # depends_on = [
   #   #openstack_compute_instance_v2.hq_server,
   #   #openstack_blockstorage_volume_v2.slurm_data
@@ -82,7 +81,8 @@ resource "null_resource" "worker_configure" {
   triggers = {
     instance_id = openstack_compute_instance_v2.hq_worker[count.index].id
     n_workers = var.n_workers
-    hosts_content = filemd5("${path.module}/confs/hosts")
+    # problems still with hosts stuff..
+    #hosts_content = filemd5("${path.module}/confs/hosts")
     #hosts_hash = locals.hosts_md5
   }
 

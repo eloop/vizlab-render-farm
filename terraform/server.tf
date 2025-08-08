@@ -6,8 +6,6 @@
 # This node runs the hqserver
 resource "openstack_compute_instance_v2" "hq_server" {
 
-  depends_on = [  local_file.hosts ]
-
   name        = "hq-server"
   image_id    = var.server_image_id
   flavor_name = var.server_flavor

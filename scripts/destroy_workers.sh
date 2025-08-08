@@ -16,19 +16,9 @@ strip_ansi() {
     sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
 }
 
-echo "Setting up deployment..."
-
-# Change to terraform directory
-cd terraform
-
-# Create necessary directories
-mkdir -p confs/hqserver confs/hmqserver
-
-# Create this if it doesn't exist, since we need to watch it's md5. Might be a better way but whatevs.
-touch confs/hosts
-
-# Make sure mqstart.sh is executable
-chmod +x confs/hmqserver/mqstart.sh
+echo "WARNING: This will destroy all resources in the current deployment!"
+echo "You have 5 seconds to press Ctrl+C to abort..."
+sleep 5
 
 # Get latest image information
 echo "Finding latest images..."
@@ -38,19 +28,15 @@ eval $("$SCRIPT_DIR/get_latest_images.py")
 echo "Using server image: $SERVER_IMAGE_NAME ($SERVER_IMAGE_ID)"
 echo "Using worker image: $WORKER_IMAGE_NAME ($WORKER_IMAGE_ID)"
 
-# Initialize Terraform and update providers if needed
-#echo "Initializing Terraform..."
-#terraform init -upgrade | strip_ansi
+# Change to terraform directory
+cd terraform
 
-# Deploy the infrastructure
-echo "Deploying infrastructure..."
+# Destroy the infrastructure
+echo "Destroying workers..."
 # Use tee to both display and save the output, while stripping ANSI codes
-terraform apply -auto-approve \
+terraform destroy -auto-approve \
   -var="server_image_id=$SERVER_IMAGE_ID" \
-  -var="worker_image_id=$WORKER_IMAGE_ID"
+  -var="worker_image_id=$WORKER_IMAGE_ID" \
+  -target=openstack_compute_instance_v2.hq_worker
 
-# terraform apply -auto-approve \
-#   -var="server_image_id=$SERVER_IMAGE_ID" \
-#   -var="worker_image_id=$WORKER_IMAGE_ID" 2>&1 | strip_ansi | tee ../logs/deploy.log
-
-echo "Deployment complete!"
+echo "Cleanup complete!"
