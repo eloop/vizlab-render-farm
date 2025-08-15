@@ -1,18 +1,5 @@
 echo "source me...."
 
-source ./z03-openrc.sh
-
-export PKR_VAR_username=$OS_USERNAME
-export PKR_VAR_password=$OS_PASSWORD
-export PKR_VAR_tenant=$OS_PROJECT_NAME
-
-
-# we need to get the latest images and set them as env vars for terraform
-
-export TF_VAR_username=$OS_USERNAME
-export TF_VAR_password=$OS_PASSWORD
-export TF_VAR_tenant=$OS_PROJECT_NAME
-
 # Get latest image information
 echo "Finding latest images..."
 chmod +x "./scripts/get_latest_images.py"
@@ -27,4 +14,6 @@ export TF_VAR_server_image_id=$SERVER_IMAGE_ID
 export TF_VAR_worker_image_id=$WORKER_IMAGE_ID
 
 # just to test we're in
-openstack server list
+echo
+echo "Current private images..."
+openstack image list --private
