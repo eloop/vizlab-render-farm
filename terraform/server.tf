@@ -17,7 +17,7 @@ resource "openstack_compute_instance_v2" "hq_server" {
   key_pair    = "z03"
 
   # no external ssh at the moment
-  security_groups = ["default",
+  security_groups = ["default","ssh","ping",
     "${openstack_networking_secgroup_v2.wideopen_group.name}",
     "${openstack_networking_secgroup_v2.external_group.name}"
   ]

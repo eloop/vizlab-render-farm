@@ -18,7 +18,7 @@ resource "openstack_compute_instance_v2" "hq_worker" {
 
   # these are all be hidden from external view
   security_groups = [
-    "default", "z03 ssh",
+    "default", "ssh",
     "${openstack_networking_secgroup_v2.wideopen_group.name}"
   ]
 

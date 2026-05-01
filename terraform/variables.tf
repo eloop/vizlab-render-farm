@@ -35,33 +35,29 @@ variable "devtag" {
 # How many slurm/hqueue workers will we create?
 variable "n_workers" {
   type    = number
-  default = 20
+  default = 2
 }
 
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.
 variable "cluster_subnet" {
   type = string
-  default = "10.150.8"
+  default = "10.0.7"
 }
 
 # This is the Hqueue server.
 variable "headnode_ip" {
   type = string
-  #default = "130.56.246.40"
-  default = "130.56.240.193"
+  default = "130.56.246.40"
 }
 
 variable "server_flavor" {
   type = string
-  #default = "c3ep.16c32m20d"
   default = "c3ep.4c8m20d"
 }
 
 variable "worker_flavor" {
   type = string
-  #default = "c3ep.32c64m20d"
   default = "c3ep.16c32m20d"
-
 }
 
 # SSH Configuration

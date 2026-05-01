@@ -21,14 +21,13 @@ locals {
 
 variable "source_image_id" {
   type        = string
-  #default     = "2739e944-abd1-42e7-a0e3-929b221c002f"  # Ubuntu Noble Server 2024-10-04
-  default     = "261334e6-e3e0-4695-9187-beec83ac196b"  # Ubuntu Noble Server 2025-07-25
+  default = "3dccd985-1b91-4d78-af62-667ce8b53c46"
   description = "The source image ID to build from"
 }
 
 variable "flavor" {
   type        = string
-  default     = "c3.4c8m10d"
+  default     = "c3ep.4c8m20d"
   description = "The flavor to use for building the image"
 }
 
@@ -61,7 +60,8 @@ source "openstack" "ubuntu" {
 
   # Security groups
   #security_groups     = ["default", "ssh", "ping"]
-  security_groups     = ["default", "z03 ssh"]
+  #security_groups     = ["default", "z03 ssh"]
+  security_groups     = ["default", "ssh"]
 
   # Image metadata
   metadata = {

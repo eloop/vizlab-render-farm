@@ -7,21 +7,19 @@ variable "image_name" {
 
 variable "houdini_software_path" {
   type        = string
-  default     = "/home/drw900/Downloads/HOUDINI/houdini-20.5.584-linux_x86_64_gcc11.2.tar.gz"
+  default     = "/home/drw900/Downloads/HOUDINI/houdini-21.0.671-linux_x86_64_gcc11.2.tar.gz"
   description = "Path to the Houdini software package"
 }
 
 variable "base_image_id" {
   type        = string
   description = "The ID of the base image to use"
-  #default     = "a281b35e-fb23-44a3-930f-1236bb4a4a72"  # Default to current base image
-  default     = "98f2d3de-b3ac-4b74-b3d7-275e72e60fc4"  # Default to current base image
+  default     = "ed6711d5-c42b-423d-8fd9-580ad8103850"  # Default to current base image
 }
 
 variable "flavor" {
   type        = string
-  #default     = "c3pl.16c32m20d"
-  default     = "c3ep.16c32m20d"
+  default     = "c3ep.8c16m20d"
   description = "The flavor to use for building the image"
 }
 
