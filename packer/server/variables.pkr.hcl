@@ -7,19 +7,19 @@ variable "image_name" {
 
 variable "houdini_software_path" {
   type        = string
-  default     = "/home/drw900/Downloads/HOUDINI/houdini-20.5.584-linux_x86_64_gcc11.2.tar.gz"
+  default     = "/home/drw900/Downloads/HOUDINI/houdini-21.0.671-linux_x86_64_gcc11.2.tar.gz"
   description = "Path to the Houdini software package"
 }
 
 variable "base_image_id" {
   type        = string
   description = "The ID of the base image to use"
-  default     = "a281b35e-fb23-44a3-930f-1236bb4a4a72"  # Default to current base image
+  default     = "ed6711d5-c42b-423d-8fd9-580ad8103850"  # Default to current base image
 }
 
 variable "flavor" {
   type        = string
-  default     = "c3pl.16c32m20d"
+  default     = "c3ep.8c16m20d"
   description = "The flavor to use for building the image"
 }
 
@@ -61,8 +61,8 @@ variable "ssh_bastion_private_key_file" {
 
 variable "license_server" {
   type        = string
-  default     = "130.56.246.41"
-  description = "The Houdini license server address"
+  default     = "10.0.1.216"
+  description = "The Houdini license server address (internal)"
 }
 
 variable "eula_date" {

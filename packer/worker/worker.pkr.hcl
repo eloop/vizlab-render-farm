@@ -6,12 +6,12 @@ locals {
 source "openstack" "worker" {
   image_name                   = local.image_name
   flavor                       = var.flavor
-  security_groups              = ["default", "ssh", "ping"]
+  security_groups              = ["default", "ssh"]
   source_image                 = var.base_image_id
   ssh_keypair_name             = var.ssh_keypair_name
-  ssh_bastion_host             = var.ssh_bastion_host
-  ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
-  ssh_bastion_username         = var.ssh_bastion_username
+  # ssh_bastion_host             = var.ssh_bastion_host
+  # ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
+  # ssh_bastion_username         = var.ssh_bastion_username
   ssh_private_key_file         = var.ssh_private_key_file
   ssh_username                 = var.ssh_username
 
@@ -22,7 +22,7 @@ source "openstack" "worker" {
     os_flavor     = "worker"
     builder       = "packer"
     base_image_id = var.base_image_id
-    houdini_version = "20.5.584"
+    houdini_version = "21.0.671"
   }
 }
 
@@ -101,29 +101,28 @@ build {
   provisioner "shell" {
     inline = [
       <<EOT
-      export EULA_DATE="2021-10-13"
 
       cd /mnt/ramdisk && sudo tar xvfz ./ubuntu/hh.tar.gz && cd houdini* && sudo ./houdini.install \
       --no-root-check\
       --auto-install \
       --no-install-license \
-      --license-server-name 130.56.246.41 \
-      --accept-EULA $EULA_DATE \
+      --license-server-name ${var.license_server}  \
+      --accept-EULA ${var.eula_date} \
       --no-install-bin-symlink \
       --no-install-menus \
       --install-sidefxlabs \
       --no-install-hqueue-server \
       --no-install-hqueue-client
 
-      sudo sh -c "cd /opt && mkdir -p houdini_distros && cd houdini_distros && ln -s /opt/hfs20.5 hfs.linux-x86_64"
+      sudo sh -c "cd /opt && mkdir -p houdini_distros && cd houdini_distros && ln -s /opt/hfs21.0 hfs.linux-x86_64"
 
       cd /mnt/ramdisk/houdini* && sudo ./houdini.install \
       --no-root-check\
       --auto-install \
       --no-install-houdini \
       --no-install-license \
-      --license-server-name 130.56.246.41\
-      --accept-EULA $EULA_DATE \
+      --license-server-name ${var.license_server} \
+      --accept-EULA ${var.eula_date}  \
       --no-install-bin-symlink \
       --no-install-menus \
       --no-install-sidefxlabs \

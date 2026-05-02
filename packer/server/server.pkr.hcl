@@ -11,12 +11,13 @@ source "openstack" "server" {
   ssh_username                 = var.ssh_username
   ssh_keypair_name            = var.ssh_keypair_name
   ssh_private_key_file        = var.ssh_private_key_file
-  ssh_bastion_host            = var.ssh_bastion_host
-  ssh_bastion_username        = var.ssh_bastion_username
-  ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
+  #ssh_bastion_host            = var.ssh_bastion_host
+  #ssh_bastion_username        = var.ssh_bastion_username
+  #ssh_bastion_private_key_file = var.ssh_bastion_private_key_file
 
   # Security groups
-  security_groups             = ["default", "ssh", "ping"]
+  #security_groups             = ["default", "ssh", "ping"]
+  security_groups             = ["default", "ssh"]
 
   # Image metadata
   metadata = {
@@ -25,7 +26,7 @@ source "openstack" "server" {
     os_flavor     = "server"
     builder       = "packer"
     base_image_id = var.base_image_id
-    houdini_version = "20.5.584"
+    houdini_version = "21.0.671"
   }
 }
 
@@ -117,7 +118,7 @@ build {
         --hqueue-server-dir /opt/hqueue
 
       # Create Houdini distribution symlink
-      sudo sh -c "cd /opt && mkdir -p houdini_distros && cd houdini_distros && ln -s /opt/hfs20.5 hfs.linux-x86_64"
+      sudo sh -c "cd /opt && mkdir -p houdini_distros && cd houdini_distros && ln -s /opt/hfs21.0 hfs.linux-x86_64"
       EOT
     ]
   }

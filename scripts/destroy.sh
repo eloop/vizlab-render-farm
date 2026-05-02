@@ -36,6 +36,6 @@ echo "Destroying infrastructure..."
 # Use tee to both display and save the output, while stripping ANSI codes
 terraform destroy -auto-approve \
   -var="server_image_id=$SERVER_IMAGE_ID" \
-  -var="worker_image_id=$WORKER_IMAGE_ID" 2>&1 | strip_ansi | tee ../logs/destroy.log
+  -var="worker_image_id=$WORKER_IMAGE_ID"
 
 echo "Cleanup complete!"

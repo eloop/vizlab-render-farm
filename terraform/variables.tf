@@ -35,7 +35,7 @@ variable "devtag" {
 # How many slurm/hqueue workers will we create?
 variable "n_workers" {
   type    = number
-  default = 29
+  default = 30
 }
 
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.
@@ -44,10 +44,20 @@ variable "cluster_subnet" {
   default = "10.0.7"
 }
 
-# This is the slurm controller as well as the Hqueue server.
+# This is the Hqueue server.
 variable "headnode_ip" {
   type = string
   default = "130.56.246.40"
+}
+
+variable "server_flavor" {
+  type = string
+  default = "c3ep.4c8m20d"
+}
+
+variable "worker_flavor" {
+  type = string
+  default = "c3ep.16c32m20d"
 }
 
 # SSH Configuration
@@ -91,14 +101,14 @@ variable "ssh_private_key_file" {
 # Houdini Configuration
 variable "license_server" {
   type        = string
-  default     = "130.56.246.41"
-  description = "The Houdini license server address"
+  default     = "10.0.1.216"
+  description = "The Houdini license server address (internal)"
 }
 
 # Storage Configuration
 variable "vizfs_ip" {
   type        = string
-  default     = "10.0.0.20"
+  default     = "10.150.0.20"
   description = "The IP address of the VizFS server"
 }
 

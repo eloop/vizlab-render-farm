@@ -9,6 +9,8 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
 10.0.7.253 hq-server hq-server-internal
+130.56.246.16 newlicenses-external
+10.0.1.216 newlicenses
 
 10.0.7.1 hq-worker-001 hq-worker-001-internal
 10.0.7.2 hq-worker-002 hq-worker-002-internal
@@ -39,3 +41,4 @@ ff02::2 ip6-allrouters
 10.0.7.27 hq-worker-027 hq-worker-027-internal
 10.0.7.28 hq-worker-028 hq-worker-028-internal
 10.0.7.29 hq-worker-029 hq-worker-029-internal
+10.0.7.30 hq-worker-030 hq-worker-030-internal
