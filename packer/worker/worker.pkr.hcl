@@ -101,14 +101,13 @@ build {
   provisioner "shell" {
     inline = [
       <<EOT
-      export EULA_DATE="2021-10-13"
 
       cd /mnt/ramdisk && sudo tar xvfz ./ubuntu/hh.tar.gz && cd houdini* && sudo ./houdini.install \
       --no-root-check\
       --auto-install \
       --no-install-license \
-      --license-server-name 130.56.246.16 \
-      --accept-EULA $EULA_DATE \
+      --license-server-name ${var.license_server}  \
+      --accept-EULA ${var.eula_date} \
       --no-install-bin-symlink \
       --no-install-menus \
       --install-sidefxlabs \
@@ -122,8 +121,8 @@ build {
       --auto-install \
       --no-install-houdini \
       --no-install-license \
-      --license-server-name 130.56.246.16\
-      --accept-EULA $EULA_DATE \
+      --license-server-name ${var.license_server} \
+      --accept-EULA ${var.eula_date}  \
       --no-install-bin-symlink \
       --no-install-menus \
       --no-install-sidefxlabs \

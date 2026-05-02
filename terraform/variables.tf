@@ -35,7 +35,7 @@ variable "devtag" {
 # How many slurm/hqueue workers will we create?
 variable "n_workers" {
   type    = number
-  default = 2
+  default = 30
 }
 
 # If this gets changed, remember to change in confs/genhost.py as well and regenerate.
@@ -101,8 +101,8 @@ variable "ssh_private_key_file" {
 # Houdini Configuration
 variable "license_server" {
   type        = string
-  default     = "130.56.246.41"
-  description = "The Houdini license server address"
+  default     = "10.0.1.216"
+  description = "The Houdini license server address (internal)"
 }
 
 # Storage Configuration

@@ -85,8 +85,8 @@ variable "ssh_bastion_private_key_file" {
 
 variable "license_server" {
   type        = string
-  default     = "130.56.246.41"
-  description = "The Houdini license server address"
+  default     = "10.0.1.216"
+  description = "The Houdini license server address (internal)"
 }
 
 variable "eula_date" {

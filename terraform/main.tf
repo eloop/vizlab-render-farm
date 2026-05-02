@@ -59,7 +59,8 @@ locals {
     "",
     # Server entry
     "${var.cluster_subnet}.253 hq-server hq-server-internal",
-    "130.56.246.16 newlicenses",
+    "130.56.246.16 newlicenses-external",
+    "${var.license_server} newlicenses",
     ""
   ],
   # Worker entries, autgenerated.

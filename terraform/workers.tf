@@ -97,14 +97,21 @@ resource "null_resource" "worker_configure" {
       sudo cp ./confs/hosts /etc/hosts
       sudo mount -a
       sudo cp ./confs/hqserver/sesi_licenses.pref /home/hquser/.sesi_licenses.pref
+
+      # this doesn't seem to work now
       sudo chown hquser:hqgroup /home/hquser/.sesi_licenses.pref
+
+      # make sure we read the latest config
+      sudo systemctl restart hqueue-client
+
+      bash -c "pushd /opt/hfs21.0 && source houdini_setup && hserver -S newlicenses && popd"
 
       # drw900 - H20.5
       #sudo cp ./confs/hqclient/hqclient.service /etc/systemd/system
       #sudo systemctl enable hqclient
       #sudo systemctl restart hqclient
 
-      rm -rf confs
+      #rm -rf confs
       EOT
       ,
     ]
