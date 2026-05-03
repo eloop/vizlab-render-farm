@@ -45,7 +45,7 @@ echo "Using worker image: $WORKER_IMAGE_NAME ($WORKER_IMAGE_ID)"
 # Deploy the infrastructure
 echo "Deploying infrastructure..."
 # Use tee to both display and save the output, while stripping ANSI codes
-terraform apply -auto-approve \
+terraform apply -auto-approve -parallelism=5 \
   -var="server_image_id=$SERVER_IMAGE_ID" \
   -var="worker_image_id=$WORKER_IMAGE_ID"
 

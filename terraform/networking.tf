@@ -95,16 +95,16 @@ resource "openstack_networking_secgroup_rule_v2" "external_rule_2_hq" {
   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
 }
 
-# iq
-resource "openstack_networking_secgroup_rule_v2" "external_rule_2_simon" {
-  direction         = "ingress"
-  ethertype         = "IPv4"
-  protocol          = "tcp"
-  port_range_min    = 5000
-  port_range_max    = 5000
-  remote_ip_prefix  = "10.1.6.0/24" # Simon / VPN access
-  security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
-}
+# # for simon to take a look
+# resource "openstack_networking_secgroup_rule_v2" "external_rule_2_simon" {
+#   direction         = "ingress"
+#   ethertype         = "IPv4"
+#   protocol          = "tcp"
+#   port_range_min    = 5000
+#   port_range_max    = 5000
+#   remote_ip_prefix  = "10.1.6.0/24" # Simon / VPN access
+#   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
+# }
 
 # grainger
 resource "openstack_networking_secgroup_rule_v2" "external_rule_3_hq" {
