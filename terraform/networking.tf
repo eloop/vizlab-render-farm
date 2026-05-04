@@ -1,5 +1,7 @@
+#
 # We let the nodes talk to each other without restriction on the local
-# netork.
+# netork
+#
 resource "openstack_networking_secgroup_v2" "wideopen_group" {
   name        = "tf-wideopen-internal-rules"
   description = "for internal talk only"
@@ -84,7 +86,7 @@ resource "openstack_networking_secgroup_rule_v2" "external_rule_1d_mq" {
   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
 }
 
-# iq
+# mf (drews home desktop)
 resource "openstack_networking_secgroup_rule_v2" "external_rule_2_hq" {
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -135,6 +137,28 @@ resource "openstack_networking_secgroup_rule_v2" "external_rule_5_hq" {
   protocol          = "tcp"
   port_range_min    = 5000
   port_range_max    = 5000
-  remote_ip_prefix  = "150.203.248.136/32" #perceval
+  remote_ip_prefix  = "150.203.248.136/32"
+  security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
+}
+
+# brett (drews desktop)
+resource "openstack_networking_secgroup_rule_v2" "external_rule_6_hq" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 5000
+  port_range_max    = 5000
+  remote_ip_prefix  = "150.203.248.64/32"
+  security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
+}
+
+# olsen (ajay desktop)
+resource "openstack_networking_secgroup_rule_v2" "external_rule_7_hq" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 5000
+  port_range_max    = 5000
+  remote_ip_prefix  = "150.203.248.116/32"
   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
 }
