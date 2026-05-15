@@ -119,7 +119,7 @@ resource "openstack_networking_secgroup_rule_v2" "external_rule_3_hq" {
   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
 }
 
-# perceval
+# perceval - dust bin mac of stuarts
 resource "openstack_networking_secgroup_rule_v2" "external_rule_4_hq" {
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -127,6 +127,16 @@ resource "openstack_networking_secgroup_rule_v2" "external_rule_4_hq" {
   port_range_min    = 5000
   port_range_max    = 5000
   remote_ip_prefix  = "150.203.248.62/32" #perceval
+  security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
+}
+# stelarc
+resource "openstack_networking_secgroup_rule_v2" "external_rule_4a_hq" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 5000
+  port_range_max    = 5000
+  remote_ip_prefix  = "150.203.248.90/32" # stelarc
   security_group_id = "${openstack_networking_secgroup_v2.external_group.id}"
 }
 

@@ -87,8 +87,8 @@ resource "null_resource" "worker_configure" {
   }
 
   provisioner "file" {
-    source      = "${path.module}/confs"
-    destination = "confs"
+    source      = "${path.module}/confs/"
+    destination = "/home/ubuntu/confs/"
   }
 
   provisioner "remote-exec" {
@@ -96,22 +96,22 @@ resource "null_resource" "worker_configure" {
       <<EOT
       sudo cp ./confs/hosts /etc/hosts
       sudo mount -a
-      sudo cp ./confs/hqserver/sesi_licenses.pref /home/hquser/.sesi_licenses.pref
-
-      # this doesn't seem to work now
-      sudo chown hquser:hqgroup /home/hquser/.sesi_licenses.pref
+      sudo cp ./confs/hqserver/sesi_licenses.pref /home/hquser
+      sudo cp ./confs/hqclient/hqnode.ini /home/hquser/hqclient
+      sudo chown hquser:hqgroup /home/hquser/.sesi_licenses.pref /home/hquser/hqclient/hqnode.ini
 
       # make sure we read the latest config
       sudo systemctl restart hqueue-client
 
+      # force it to use the license server!
       bash -c "pushd /opt/hfs21.0 && source houdini_setup && hserver -S newlicenses && popd"
 
       # drw900 - H20.5
       #sudo cp ./confs/hqclient/hqclient.service /etc/systemd/system
       #sudo systemctl enable hqclient
       #sudo systemctl restart hqclient
-
       #rm -rf confs
+
       EOT
       ,
     ]

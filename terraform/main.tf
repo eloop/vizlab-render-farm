@@ -32,7 +32,7 @@ provider "tailscale" {
   tailnet = "drew.whitehouse@gmail.com"
 }
 
-# A group so we can enforce antiaffinity
+# A group so we can enforce antiaffinity/affinity
 resource "openstack_compute_servergroup_v2" "hq-server-group" {
   name     = "hq-server-group"
   #policies = ["anti-affinity"]
